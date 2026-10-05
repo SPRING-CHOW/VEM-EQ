@@ -21,7 +21,7 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            max-width: 100%;
+            max-width: 60%;
             height: auto;
         }
 
@@ -48,13 +48,34 @@
         .download-btn:hover {
             background-color: #0051a8;
         }
+        /* 限制单元格内图片的尺寸 */
+        .table-img {
+  width: 108px;          /* 规定图片宽度 */
+  height: 192px;         /* 规定图片高度 */
+  object-fit: cover;    /* 保持比例裁剪，防止图片变形 */
+  border-radius: 4px;   /* 可选：为图片添加轻微圆角 */
+  vertical-align: middle; /* 保持在单元格内垂直居中 */
+}
+        
+/* 单元格文本内容垂直居中 */
+td {
+  vertical-align: middle;
+  text-align: center;
+}
 
+
+        
         /* 表格与编辑框样式 */
         table { width: 100%; border-collapse: collapse; margin-top: 10px; }
         th, td { border: 1px solid #e0e0e0; padding: 10px 14px; text-align: left; }
         th { background-color: #f5f7fa; }
         td[contenteditable="true"]:focus { outline: 2px solid #0070f3; background-color: #f0f7ff; }
-        
+        /* 让表头和表格内容的文字水平 + 垂直居中 */
+#equipment-table th,
+#equipment-table td {
+  text-align: center;     /* 水平居中 */
+  vertical-align: middle; /* 垂直居中 */
+}
         .btn-group { margin-top: 15px; }
         button { padding: 8px 16px; margin-right: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
         .btn-add { background-color: #0070f3; color: white; }
@@ -71,16 +92,49 @@
 <body>
 
     <!-- 1. 顶部图片（已居中） -->
-    <img src="VEM-LOGO.png" class="center-img" alt="越南电子材料有限公司">
+    <img src="VEM-LOGO.png" 
+     alt="图片" 
+     class="center-img"
+     draggable="false" 
+     oncontextmenu="return false;" 
+     onselectstart="return false;">
 
     <!-- 2. 页眉与说明 -->
-    <h1>设备信息明细应该不是这个版本</h1>
-    <p>设备基本信息如下表</p>
-    <p>访问 <a href="https://fantastic-syrniki-babac6.netlify.app" target="_blank">主页</a></p>
+    <h1 style="font-size: 30px; text-align: center;">越南电子材料有限公司</h1>
+    <p style="font-size: 30px; text-align: center;">VINA ELECTRONIC MATERIAL CO., LTD.</p>
+    <h3>设备基本信息如下表</h3>
+    <!-- <p>访问 <a href="https://fantastic-syrniki-babac6.netlify.app" target="_blank">主页</a></p> -->
+
+<table id="equipment-table">
+
+    <thead>
+        <tr>
+            <th>设备名称tên hàng hóa</th>
+            <th>设备编号mã liệu</th>
+            <th>第三方名称cty hiểu chuẩn</th>
+            <th>有效期至Thời hạn đến</th>
+            <th>设备外观Hình thức thiết bị</th>
+        </tr>
+    </thead>
+    <tbody id="equipment-tbody">
+        <!-- 核心重点：每个 <td> 上都加上了 contenteditable="true" -->
+        <tr>
+            <td contenteditable="false">万分位电子天平CÂN ĐIỆN TỬ</td>
+            <td contenteditable="false">LR-022GM-01</td>
+            <td contenteditable="false">IMC</td>
+            <td contenteditable="false">2027/4/28</td>
+            <td>
+                <img src="LR-022GM-01.jpg" class="table-img" alt="万分位分析天平">
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+
 
     <!-- 3. 学习列表 -->
-    <h3>我接下来想学的内容：</h3>
-    <ul>
+    <!-- <h3>我接下来想学的内容：</h3> -->
+    <!-- <ul>
         <li>HTML5 语义化标签</li>
         <li>CSS 美化排版</li>
         <li>JavaScript 动态交互</li>
@@ -89,23 +143,23 @@
     <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
 
     <!-- 4. PDF 附件预览区域 -->
-    <h2>附件预览：8D报告</h2>
+    <h2>校准公司校准报告cty hiểu chuẩn</h2>
     <div class="pdf-wrapper">
-        <iframe src="8D报告-越南基地氢氟酸异常.pdf" width="1000px" height="1000px" frameborder="0"></iframe>
+        <iframe src="LR-022GM-01.pdf" width="1000px" height="1000px" frameborder="0"></iframe>
         <div class="pdf-mobile-tip">
             <p>📱 手机端如果无法直接预览，请点击下方按钮：</p>
-            <a href="8D报告-越南基地氢氟酸异常.pdf" target="_blank" class="download-btn">全屏查看 / 下载 PDF 文档</a>
+            <a href="LR-022GM-01.pdf" target="_blank" class="download-btn">全屏查看 / 下载 PDF 文档</a>
         </div>
     </div>
 
     <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
 
     <!-- 5. HTM 附件预览区域 -->
-    <h2>附件预览：泰国实验室设备清单</h2>
+    <!-- <h2>附件预览：泰国实验室设备清单</h2>
     <div class="excel-wrapper">
         <!-- 5. 泰国实验室设备清单（完美可编辑版） -->
 <h2>设备清单：泰国实验室设备</h2>
-<p>💡 提示：点击表格任意单元格直接修改，修改后点击【保存修改】即可。</p>
+<p>💡 提示：点击表格任意单元格直接修改，修改后点击【保存修改】即可。</p> -->
 
 <table id="equipment-table">
     <thead>
