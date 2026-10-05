@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEM设备信息明细</title>
+    
+    <!-- 所有样式集中放在这里 -->
+    <style>
+        /* 全局页面边距与字体 */
+        body { 
+            font-family: "Times New Roman", Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 30px auto; 
+            padding: 0 15px; 
+            background-color: #ffffff;
+        }
+
+        /* 图片居中样式 */
+        .center-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* 移动端下载/预览提示块 */
+        .pdf-mobile-tip {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0070f3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .download-btn:hover {
+            background-color: #0051a8;
+        }
+
+        /* 表格与编辑框样式 */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #e0e0e0; padding: 10px 14px; text-align: left; }
+        th { background-color: #f5f7fa; }
+        td[contenteditable="true"]:focus { outline: 2px solid #0070f3; background-color: #f0f7ff; }
+        
+        .btn-group { margin-top: 15px; }
+        button { padding: 8px 16px; margin-right: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-add { background-color: #0070f3; color: white; }
+        .btn-save { background-color: #10b981; color: white; }
+        .btn-reset { background-color: #ef4444; color: white; }
+
+        /* 被鼠标框选的单元格高亮样式 */
+#equipment-table td.selected {
+    background-color: #cce5ff !important;
+    outline: 1px solid #0070f3;
+}
+    </style>
+</head>
+<body>
+
+    <!-- 1. 顶部图片（已居中） -->
+    <img src="VEM-LOGO.png" class="center-img" alt="越南电子材料有限公司">
+
+    <!-- 2. 页眉与说明 -->
+    <h1>设备信息明细应该不是这个版本</h1>
+    <p>设备基本信息如下表</p>
+    <p>访问 <a href="https://fantastic-syrniki-babac6.netlify.app" target="_blank">主页</a></p>
+
+    <!-- 3. 学习列表 -->
+    <h3>我接下来想学的内容：</h3>
+    <ul>
+        <li>HTML5 语义化标签</li>
+        <li>CSS 美化排版</li>
+        <li>JavaScript 动态交互</li>
+    </ul>
+
+    <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+
+    <!-- 4. PDF 附件预览区域 -->
+    <h2>附件预览：8D报告</h2>
+    <div class="pdf-wrapper">
+        <iframe src="8D报告-越南基地氢氟酸异常.pdf" width="1000px" height="1000px" frameborder="0"></iframe>
+        <div class="pdf-mobile-tip">
+            <p>📱 手机端如果无法直接预览，请点击下方按钮：</p>
+            <a href="8D报告-越南基地氢氟酸异常.pdf" target="_blank" class="download-btn">全屏查看 / 下载 PDF 文档</a>
+        </div>
+    </div>
+
+    <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+
+    <!-- 5. HTM 附件预览区域 -->
+    <h2>附件预览：泰国实验室设备清单</h2>
+    <div class="excel-wrapper">
+        <!-- 5. 泰国实验室设备清单（完美可编辑版） -->
+<h2>设备清单：泰国实验室设备</h2>
+<p>💡 提示：点击表格任意单元格直接修改，修改后点击【保存修改】即可。</p>
+
+<table id="equipment-table">
+    <thead>
+        <tr>
+            <th>设备名称</th>
+            <th>设备型号</th>
+            <th>资产编号</th>
+            <th>存放位置</th>
+            <th>状态</th>
+        </tr>
+    </thead>
+    <tbody id="equipment-tbody">
+        <!-- 核心重点：每个 <td> 上都加上了 contenteditable="true" -->
+        <tr>
+            <td contenteditable="true">高效液相色谱仪</td>
+            <td contenteditable="true">LC-2030</td>
+            <td contenteditable="true">VEM-LAB-001</td>
+            <td contenteditable="true">泰国实验室 A1</td>
+            <td contenteditable="true">正常运行</td>
+        </tr>
+        <tr>
+            <td contenteditable="true">电子分析天平</td>
+            <td contenteditable="true">ME204T</td>
+            <td contenteditable="true">VEM-LAB-002</td>
+            <td contenteditable="true">泰国实验室 B2</td>
+            <td contenteditable="true">待校准</td>
+        </tr>
+    </tbody>
+</table>
+
+<div class="btn-group">
+    <button class="btn-add" onclick="addEquipmentRow()">➕ 新增设备</button>
+    <button class="btn-save" onclick="saveEquipmentData()">💾 保存修改</button>
+</div>
+
+<!-- 配套功能脚本：自动加载历史修改、新增行与保存 -->
+<script>
+    // 页面载入时自动恢复上次保存的数据
+    window.addEventListener('DOMContentLoaded', function() {
+        const savedEquipment = localStorage.getItem('my_equipment_data');
+        if (savedEquipment) {
+            document.getElementById('equipment-tbody').innerHTML = savedEquipment;
+        }
+    });
+
+    // 点击保存按钮：将修改保存到本地
+    function saveEquipmentData() {
+        const tbodyHtml = document.getElementById('equipment-tbody').innerHTML;
+        localStorage.setItem('my_equipment_data', tbodyHtml);
+        alert('✅ 设备清单保存成功！即使刷新页面，修改后的内容也会保留。');
+    }
+
+    // 点击新增设备：动态添加一行带 contenteditable="true" 的单元格
+    function addEquipmentRow() {
+        const tbody = document.getElementById('equipment-tbody');
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td contenteditable="true">新设备</td>
+            <td contenteditable="true">未填</td>
+            <td contenteditable="true">VEM-LAB-XXX</td>
+            <td contenteditable="true">待定</td>
+            <td contenteditable="true">未知</td>
+        `;
+        tbody.appendChild(newRow);
+    }
+</script>
+        <div class="pdf-mobile-tip">
+            <p>📱 手机端如果无法直接预览，请点击下方按钮：</p>
+            <a href="泰国实验室设备清单.xlsx" target="_blank" class="download-btn">全屏查看 HTM 文档</a>
+        </div>
+    </div>
+
+    <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+
+    <!-- 6. 可编辑表格（自动保存） -->
+    <h2>可编辑设备表格（支持自动保存）</h2>
+    <p>💡 修改表格后点击<b>保存修改</b>，刷新或重启浏览器数据也不会丢失。</p>
+
+    <table id="my-table">
+        <thead>
+            <tr>
+                <th>产品名称</th>
+                <th>数量</th>
+                <th>备注</th>
+            </tr>
+        </thead>
+        <tbody id="table-body">
+            <tr>
+                <td contenteditable="true">蓝牙耳机</td>
+                <td contenteditable="true">50</td>
+                <td contenteditable="true">热销中</td>
+            </tr>
+            <tr>
+                <td contenteditable="true">机械键盘</td>
+                <td contenteditable="true">20</td>
+                <td contenteditable="true">库存紧张</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-group">
+        <button class="btn-add" onclick="addRow()">➕ 新增行</button>
+        <button class="btn-save" onclick="saveData()">💾 保存修改</button>
+        <button class="btn-reset" onclick="resetData()">🔄 恢复默认</button>
+    </div>
+
+    <!-- 7. 表格保存逻辑脚本 -->
+    <script>
+        const STORAGE_KEY = 'my_saved_table_data';
+
+        window.onload = function() {
+            const savedData = localStorage.getItem(STORAGE_KEY);
+            if (savedData) {
+                document.getElementById('table-body').innerHTML = savedData;
+            }
+        };
+
+        function saveData() {
+            const tbodyHtml = document.getElementById('table-body').innerHTML;
+            localStorage.setItem(STORAGE_KEY, tbodyHtml);
+            alert('✅ 保存成功！即使关闭或刷新浏览器，数据也会保留。');
+        }
+
+        function addRow() {
+            const tbody = document.getElementById('table-body');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td contenteditable="true">新产品</td>
+                <td contenteditable="true">0</td>
+                <td contenteditable="true">待填写</td>
+            `;
+            tbody.appendChild(newRow);
+        }
+
+        function resetData() {
+            if (confirm('确定要清空保存的数据，恢复到最开始的初始值吗？')) {
+                localStorage.removeItem(STORAGE_KEY);
+                location.reload();
+            }
+        }
+    </script>
+<script>
+    let isMouseDown = false;
+    let startCell = null;
+
+    const table = document.getElementById('equipment-table');
+
+    // 监听鼠标按下事件（开始框选）
+    table.addEventListener('mousedown', function(e) {
+        if (e.target.tagName === 'TD') {
+            isMouseDown = true;
+            // 清除之前的选中状态
+            clearSelection();
+            startCell = e.target;
+            startCell.classList.add('selected');
+        }
+    });
+
+    // 监听鼠标划过事件（划过时选择矩形区域内的所有单元格）
+    table.addEventListener('mouseover', function(e) {
+        if (isMouseDown && e.target.tagName === 'TD') {
+            clearSelection();
+            selectCellRange(startCell, e.target);
+        }
+    });
+
+    // 监听鼠标抬起事件（结束框选）
+    document.addEventListener('mouseup', function() {
+        isMouseDown = false;
+    });
+
+    // 清除选中高亮
+    function clearSelection() {
+        const cells = table.querySelectorAll('td');
+        cells.forEach(cell => cell.classList.remove('selected'));
+    }
+
+    // 计算并高亮起点到终点之间的矩形单元格区域
+    function selectCellRange(start, end) {
+        const rowStart = start.parentElement.rowIndex;
+        const colStart = start.cellIndex;
+        const rowEnd = end.parentElement.rowIndex;
+        const colEnd = end.cellIndex;
+
+        const minRow = Math.min(rowStart, rowEnd);
+        const maxRow = Math.max(rowStart, rowEnd);
+        const minCol = Math.min(colStart, colEnd);
+        const maxCol = Math.max(colStart, colEnd);
+
+        const rows = table.querySelectorAll('tr');
+        for (let r = minRow; r <= maxRow; r++) {
+            const cells = rows[r].querySelectorAll('td, th');
+            for (let c = minCol; c <= maxCol; c++) {
+                if (cells[c] && cells[c].tagName === 'TD') {
+                    cells[c].classList.add('selected');
+                }
+            }
+        }
+    }
+    // 监听键盘复制动作（Ctrl + C / Cmd + C）
+document.addEventListener('copy', function(e) {
+    const table = document.getElementById('equipment-table');
+    if (!table) return;
+
+    // 获取当前被框选高亮的所有 td 单元格
+    const selectedCells = table.querySelectorAll('td.selected');
+    if (selectedCells.length === 0) return; // 如果没有框选，执行浏览器默认复制
+
+    // 按“行”归类框选的数据
+    const rowMap = new Map();
+    selectedCells.forEach(cell => {
+        const rowIndex = cell.parentElement.rowIndex; // 获取行号
+        if (!rowMap.has(rowIndex)) {
+            rowMap.set(rowIndex, []);
+        }
+        // 读取单元格文本
+        rowMap.get(rowIndex).push(cell.innerText.trim());
+    });
+
+    // 将多行多列数据拼接为 Excel 标准的 TSV 格式（列之间用 \t 分隔，行之间用 \n 分隔）
+    const tsvRows = [];
+    rowMap.forEach((cellsInRow) => {
+        tsvRows.push(cellsInRow.join('\t'));
+    });
+    const tsvData = tsvRows.join('\n');
+
+    // 写入剪贴板
+    e.clipboardData.setData('text/plain', tsvData);
+    e.preventDefault(); // 阻止浏览器原生的文本复制行为
+
+    // 提示框（可选）
+    console.log('已复制选中的多单元格数据到剪贴板');
+});
+</script>
+
+</body>
+</html>
