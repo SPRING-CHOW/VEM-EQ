@@ -50,16 +50,16 @@
         }
 
         .table-img.fullscreen {
-            position: fixed;
-            insert: 0;
+            position: absolute;
+            top: 300px;
+            left: 0;
             width: 100vw;
             height: 100vh;
             object-fit: contain;        
             background-color: rgba(0, 0, 0, 0.85); 
-            z-index: 9999;               
+            z-index: 10000;               
             padding: 20px;
             box-sizing: border-box;
-            transform-origin: center;
 }
 
         .table-img {
@@ -120,15 +120,15 @@ td {
 
     
         <tr>
-            <th>设备名称<br>tên hàng hóa</th>
-            <td contenteditable="false">万分位电子天平<br>CÂN ĐIỆN TỬ</td>
+            <th>设备名称<br>Tên thiết bị</th>
+            <td contenteditable="false">万分位电子天平<br>Cân phân tích điện tử</td>
         </tr>
         <tr>
-            <th>设备编号<br>mã liệu</th>
+            <th>设备编号<br>Mã thiết bị</th>
             <td contenteditable="false">LR-022GM-01</td>
         </tr>
         <tr>
-            <th>第三方名称<br>cty hiểu chuẩn</th>
+            <th>第三方名称<br>Tên công ty hiệu chuẩn</th>
             <td contenteditable="false">IMC</td>
         </tr>
         <tr>
@@ -136,7 +136,7 @@ td {
             <td contenteditable="false">2027/4/28</td>
         </tr>
         <tr>
-            <th>设备外观<br>Hình thức thiết bị</th>
+            <th>设备外观<br>Hình ảnh ngoại quan thiết bị</th>
             <td><img src="images/LR-022GM-01-1.jpg" class="table-img" alt="万分位分析天平" onclick="this.classList.toggle('fullscreen')">
                 <img src="images/LR-022GM-01-2.jpg" class="table-img" alt="万分位分析天平" onclick="this.classList.toggle('fullscreen')">
             </td>  
@@ -144,7 +144,7 @@ td {
    
 </table>
 
-    <h2>校准公司校准报告cty hiểu chuẩn</h2>
+    <h2>校准公司校准报告<br>Báo cáo hiệu chuẩn của công ty hiệu chuẩn</h2>
     <div class="pdf-wrapper">
         <iframe src="cal/LR-022GM-01.pdf" width="1000px" height="1000px" frameborder="0"></iframe>
         <div class="pdf-mobile-tip">
