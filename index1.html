@@ -48,13 +48,28 @@
         .download-btn:hover {
             background-color: #0051a8;
         }
+        /* 激活全屏时的遮罩样式 */
+        .table-img.fullscreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;          /* 保证图片不拉伸、按比例完整显示 */
+            background-color: rgba(0, 0, 0, 0.85); /* 半透明黑色背景 */
+            z-index: 9999;                /* 置顶于所有页面元素上方 */
+            padding: 20px;
+            box-sizing: border-box;
+}
         /* 限制单元格内图片的尺寸 */
         .table-img {
-  width: 108px;          /* 规定图片宽度 */
-  height: 192px;         /* 规定图片高度 */
-  object-fit: cover;    /* 保持比例裁剪，防止图片变形 */
-  border-radius: 4px;   /* 可选：为图片添加轻微圆角 */
-  vertical-align: middle; /* 保持在单元格内垂直居中 */
+            cursor: pointer;              /* 鼠标悬停时显示手型 */
+            transition: all 0.3s ease;    /* 放大缩小动画平滑过渡 */
+            width: 108px;          /* 规定图片宽度 */
+            height: 192px;         /* 规定图片高度 */
+            object-fit: cover;    /* 保持比例裁剪，防止图片变形 */
+            border-radius: 4px;   /* 可选：为图片添加轻微圆角 */
+            vertical-align: middle; /* 保持在单元格内垂直居中 */
 }
         
 /* 单元格文本内容垂直居中 */
@@ -124,7 +139,7 @@ td {
             <td contenteditable="false">IMC</td>
             <td contenteditable="false">2027/4/28</td>
             <td>
-                <img src="LR-022GM-01.jpg" class="table-img" alt="万分位分析天平">
+                <img src="LR-022GM-01.jpg" class="table-img" alt="万分位分析天平" onclick="this.classList.toggle('fullscreen')">
             </td>
         </tr>
         
