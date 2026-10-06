@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEM设备信息明细</title>
+    
+
+    <style>
+
+        body { 
+            font-family: "Times New Roman", Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 30px auto; 
+            padding: 0 15px; 
+            background-color: #ffffff;
+        }
+
+
+        .center-img {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 60%;
+            height: auto;
+        }
+
+
+        .pdf-mobile-tip {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .download-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0070f3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .download-btn:hover {
+            background-color: #0051a8;
+        }
+
+        .table-img.fullscreen {
+            position: absolute;
+            top: 300px;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: contain;        
+            background-color: rgba(0, 0, 0, 0.85); 
+            z-index: 10000;               
+            padding: 20px;
+            box-sizing: border-box;
+}
+
+        .table-img {
+            cursor: pointer;              
+            transition: all 0.3s ease;    
+            width: 108px;         
+            height: 192px;        
+            object-fit: cover;    
+            border-radius: 4px;  
+            vertical-align: middle; 
+}
+        
+
+td {
+  vertical-align: middle;
+  text-align: center;
+}
+
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #e0e0e0; padding: 10px 14px; text-align: middle; }
+        th { background-color: #f5f7fa; }
+        td[contenteditable="true"]:focus { outline: 2px solid #0070f3; background-color: #f0f7ff; }
+
+#equipment-table th,
+#equipment-table td {
+  text-align: center;     
+  vertical-align: middle; 
+}
+        .btn-group { margin-top: 15px; }
+        button { padding: 8px 16px; margin-right: 10px; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        .btn-add { background-color: #0070f3; color: white; }
+        .btn-save { background-color: #10b981; color: white; }
+        .btn-reset { background-color: #ef4444; color: white; }
+
+
+#equipment-table td.selected {
+    background-color: #cce5ff !important;
+    outline: 1px solid #0070f3;
+}
+    </style>
+</head>
+<body>
+
+
+    <img src="images/VEM-LOGO.png" 
+     alt="图片" 
+     class="center-img"
+     draggable="false" 
+     oncontextmenu="return false;" 
+     onselectstart="return false;">
+
+
+    <h1 style="font-size: 30px; text-align: center;">越南电子材料有限公司</h1>
+    <p style="font-size: 30px; text-align: center;">VINA ELECTRONIC MATERIAL CO., LTD.</p>
+    <h3>设备基本信息如下表Thông tin cơ bản về thiết bị được liệt kê trong bảng dưới đây:</h3>
+    
+<table id="equipment-table">
+
+    
+        <tr>
+            <th>设备名称<br>Tên thiết bị</th>
+            <td contenteditable="false">小地磅<br>Cân bàn điện tử</td>
+        </tr>
+        <tr>
+            <th>设备编号<br>Mã thiết bị</th>
+            <td contenteditable="false">F-2000G-01</td>
+        </tr>
+        <tr>
+            <th>第三方名称<br>Tên công ty hiệu chuẩn</th>
+            <td contenteditable="false">IMC</td>
+        </tr>
+        <tr>
+            <th>有效期至<br>Thời hạn đến</th>
+            <td contenteditable="false">2027/4/25</td>
+        </tr>
+        <tr>
+            <th>设备外观<br>Hình ảnh ngoại quan thiết bị</th>
+            <td><img src="images/F-2000G-01-1.jpg" class="table-img" alt="小地磅" onclick="this.classList.toggle('fullscreen')">
+                <img src="images/F-2000G-01-2.jpg" class="table-img" alt="小地磅" onclick="this.classList.toggle('fullscreen')">
+            </td>  
+        </tr>
+   
+</table>
+
+    <h2>校准公司校准报告<br>Báo cáo hiệu chuẩn của công ty hiệu chuẩn</h2>
+    <div class="pdf-wrapper">
+        <iframe src="cal/F-2000G-01.pdf" width="1000px" height="1000px" frameborder="0"></iframe>
+        <div class="pdf-mobile-tip">
+            <p>📱 手机端如果无法直接预览，请点击下方按钮：<br>
+                Nếu bạn không thể xem trên điện thoại , vui lòng chọn vào bên dưới:</p>
+            <a href="cal/F-2000G-01.pdf" target="_blank" class="download-btn">DOWNLOAD PDF</a>
+        </div>
+    </div>
+
+    <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+
+  
+
+
+</body>
+</html>
