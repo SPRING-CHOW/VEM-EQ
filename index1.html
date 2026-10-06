@@ -81,8 +81,8 @@ td {
 
         
         /* 表格与编辑框样式 */
-        table { width: 200%; border-collapse: collapse; margin-top: 10px; }
-        th, td { border: 1px solid #e0e0e0; padding: 10px 14px; text-align: left; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #e0e0e0; padding: 10px 14px; text-align: middle; }
         th { background-color: #f5f7fa; }
         td[contenteditable="true"]:focus { outline: 2px solid #0070f3; background-color: #f0f7ff; }
         /* 让表头和表格内容的文字水平 + 垂直居中 */
@@ -122,28 +122,18 @@ td {
 
 <table id="equipment-table">
 
-    <thead>
+    
         <tr>
-            <th>设备名称<br>tên hàng hóa</th>
-            <th>设备编号<br>mã liệu</th>
-            <th>第三方名称<br>cty hiểu chuẩn</th>
-            <th>有效期至<br>Thời hạn đến</th>
-            <th>设备外观<br>Hình thức thiết bị</th>
-        </tr>
-    </thead>
-    <tbody id="equipment-tbody">
-        <!-- 核心重点：每个 <td> 上都加上了 contenteditable="true" -->
-        <tr>
-            <td contenteditable="false">万分位电子天平<br>CÂN ĐIỆN TỬ</td>
-            <td contenteditable="false">LR-022GM-01</td>
-            <td contenteditable="false">IMC</td>
-            <td contenteditable="false">2027/4/28</td>
-            <td>
+            <th>设备名称<br>tên hàng hóa</th><td contenteditable="false">万分位电子天平<br>CÂN ĐIỆN TỬ</td>
+            </tr>
+        <tr><th>设备编号<br>mã liệu</th><td contenteditable="false">LR-022GM-01</td></tr>
+        <tr><th>第三方名称<br>cty hiểu chuẩn</th><td contenteditable="false">IMC</td></tr>   
+        <tr><th>有效期至<br>Thời hạn đến</th><td contenteditable="false">2027/4/28</td></tr>    
+        <tr><th>设备外观<br>Hình thức thiết bị</th><td>
                 <img src="LR-022GM-01.jpg" class="table-img" alt="万分位分析天平" onclick="this.classList.toggle('fullscreen')">
-            </td>
+            </td></tr>    
         </tr>
-        
-    </tbody>
+   
 </table>
 
 
